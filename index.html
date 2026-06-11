@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UniDaily - Asisten Jadwal & Budget Makan Mahasiswa</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation (Desktop) / Top Nav (Mobile) -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="logo-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h2>UniDaily</h2>
+            </div>
+            
+            <nav class="nav-links">
+                <button class="nav-item active" data-tab="dashboard" id="btn-tab-dashboard">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9"></rect><rect x="14" y="3" width="7" height="5"></rect><rect x="14" y="12" width="7" height="9"></rect><rect x="3" y="16" width="7" height="5"></rect></svg>
+                    <span>Dashboard</span>
+                </button>
+                <button class="nav-item" data-tab="schedule" id="btn-tab-schedule">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    <span>Jadwal Kuliah</span>
+                </button>
+                <button class="nav-item" data-tab="meals" id="btn-tab-meals">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                    <span>Jatah Makan</span>
+                </button>
+                <button class="nav-item" data-tab="settings" id="btn-tab-settings">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                    <span>Pengaturan</span>
+                </button>
+                <button class="nav-item btn-logout" id="btn-logout" style="margin-top: 1.5rem; border: 1px solid rgba(239, 68, 68, 0.2); color: var(--color-danger);">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+                    <span>Keluar</span>
+                </button>
+            </nav>
+
+            <div class="user-profile-summary">
+                <div class="avatar" id="user-avatar">M</div>
+                <div class="user-info">
+                    <span class="user-name" id="display-user-name">Mahasiswa</span>
+                    <span class="user-status">Aktif Kuliah</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Workspace Area -->
+        <main class="main-content">
+            <!-- Header Section -->
+            <header class="app-header">
+                <div class="header-left">
+                    <h1 id="welcome-text">Halo, Selamat Datang!</h1>
+                    <p class="current-date" id="live-date">Kamis, 11 Juni 2026</p>
+                </div>
+                <div class="header-right">
+                    <div class="live-clock" id="live-clock">15:00</div>
+                </div>
+            </header>
+
+            <!-- TABS CONTENT -->
+
+            <!-- DASHBOARD TAB -->
+            <section id="tab-dashboard" class="tab-pane active">
+                <div class="dashboard-grid">
+                    <!-- Column 1: Schedule Summary -->
+                    <div class="grid-card schedule-summary-card">
+                        <div class="card-header">
+                            <h3>Kelas Berikutnya</h3>
+                            <span class="badge" id="countdown-badge">Mencari...</span>
+                        </div>
+                        <div class="card-body">
+                            <div id="next-class-container">
+                                <!-- Loaded dynamically via schedule.js -->
+                                <div class="loading-placeholder">Memuat kelas terdekat...</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Budget Progress -->
+                    <div class="grid-card budget-summary-card">
+                        <div class="card-header">
+                            <h3>Jatah Makan Hari Ini</h3>
+                            <button class="btn btn-sm btn-outline" id="btn-quick-meal">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                                Log Makan
+                            </button>
+                        </div>
+                        <div class="card-body budget-ring-body">
+                            <div class="ring-container">
+                                <svg class="progress-ring" width="160" height="160">
+                                    <circle class="progress-ring__background" stroke="rgba(255,255,255,0.06)" stroke-width="12" fill="transparent" r="70" cx="80" cy="80" />
+                                    <circle class="progress-ring__circle" id="budget-progress-circle" stroke="url(#budget-gradient)" stroke-width="12" stroke-linecap="round" fill="transparent" r="70" cx="80" cy="80" />
+                                    <defs>
+                                        <linearGradient id="budget-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stop-color="#3b82f6" />
+                                            <stop offset="100%" stop-color="#06b6d4" />
+                                        </linearGradient>
+                                        <linearGradient id="budget-gradient-warning" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stop-color="#f59e0b" />
+                                            <stop offset="100%" stop-color="#ef4444" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                <div class="ring-text">
+                                    <span class="ring-percentage" id="budget-percentage">0%</span>
+                                    <span class="ring-label">Terpakai</span>
+                                </div>
+                            </div>
+                            <div class="budget-stats">
+                                <div class="stat-box">
+                                    <span class="stat-label">Jatah Hari Ini</span>
+                                    <span class="stat-value" id="dash-budget-limit">Rp 0</span>
+                                </div>
+                                <div class="stat-box highlight">
+                                    <span class="stat-label">Sisa Anggaran</span>
+                                    <span class="stat-value" id="dash-budget-remaining">Rp 0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Budget Suggestion Alert -->
+                <div class="advice-card" id="budget-advice-card">
+                    <div class="advice-icon" id="advice-icon">💡</div>
+                    <div class="advice-content">
+                        <h4 id="advice-title">Rekomendasi Menu Makan</h4>
+                        <p id="advice-text">Memuat analisis sisa anggaran makan hari ini...</p>
+                    </div>
+                </div>
+
+                <!-- Quick Overview of Today's Classes -->
+                <div class="dashboard-section mt-6">
+                    <div class="section-header">
+                        <h2>Agenda Kuliah Hari Ini</h2>
+                        <button class="btn btn-text" id="btn-view-all-schedule">Lihat Semua Jadwal &rarr;</button>
+                    </div>
+                    <div class="timeline-list" id="today-classes-list">
+                        <!-- Loaded dynamically -->
+                        <div class="empty-state">Tidak ada jadwal kuliah terdaftar hari ini.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SCHEDULE TAB -->
+            <section id="tab-schedule" class="tab-pane">
+                <div class="tab-header-actions">
+                    <div class="day-selector-scroll">
+                        <div class="day-pills-container" id="schedule-day-pills">
+                            <button class="day-pill active" data-day="1">Senin</button>
+                            <button class="day-pill" data-day="2">Selasa</button>
+                            <button class="day-pill" data-day="3">Rabu</button>
+                            <button class="day-pill" data-day="4">Kamis</button>
+                            <button class="day-pill" data-day="5">Jumat</button>
+                            <button class="day-pill" data-day="6">Sabtu</button>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" id="btn-add-class">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                        Tambah Kelas
+                    </button>
+                </div>
+
+                <div class="classes-board" id="classes-list-container">
+                    <!-- Dynamically populated classes cards -->
+                    <div class="empty-state">
+                        <div class="empty-icon">📅</div>
+                        <h3>Tidak Ada Kelas</h3>
+                        <p>Belum ada jadwal kuliah untuk hari ini. Klik tombol di atas untuk menambah kelas baru.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- MEALS TAB -->
+            <section id="tab-meals" class="tab-pane">
+                <div class="meals-summary-grid">
+                    <!-- Daily summary tracker card -->
+                    <div class="meal-card stats-card">
+                        <h3>Akumulasi Harian</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="label">Sarapan</span>
+                                <span class="value" id="meal-spent-breakfast">Rp 0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="label">Makan Siang</span>
+                                <span class="value" id="meal-spent-lunch">Rp 0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="label">Makan Malam</span>
+                                <span class="value" id="meal-spent-dinner">Rp 0</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="label">Cemilan / Lainnya</span>
+                                <span class="value" id="meal-spent-snack">Rp 0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Setup quick details card -->
+                    <div class="meal-card setup-card">
+                        <h3>Kelola Anggaran Makan</h3>
+                        <div class="quick-budget-config">
+                            <label for="input-daily-budget">Batas Jatah Makan / Hari</label>
+                            <div class="input-with-button">
+                                <span class="prefix">Rp</span>
+                                <input type="number" id="input-daily-budget" value="50000" min="1000" step="5000">
+                                <button class="btn btn-primary btn-icon-only" id="btn-save-daily-budget" title="Simpan Budget">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="meal-actions mt-4">
+                            <button class="btn btn-primary w-full" id="btn-add-meal-expense">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+                                Catat Pengeluaran Makan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Today's Log Section -->
+                <div class="logs-section mt-6">
+                    <div class="section-header">
+                        <h2>Riwayat Makan Hari Ini</h2>
+                        <button class="btn btn-sm btn-outline-danger" id="btn-reset-today-meals">Reset Hari Ini</button>
+                    </div>
+                    <div class="meal-logs-list" id="today-meals-logs">
+                        <!-- Loaded dynamically -->
+                        <div class="empty-state">Belum mencatat pengeluaran makan hari ini.</div>
+                    </div>
+                </div>
+
+                <!-- History Logs Section -->
+                <div class="logs-section mt-6">
+                    <div class="section-header">
+                        <h2>Riwayat Hari-Hari Sebelumnya</h2>
+                    </div>
+                    <div class="history-logs-list" id="history-meals-logs">
+                        <!-- Loaded dynamically -->
+                        <div class="empty-state">Belum ada riwayat hari sebelumnya.</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SETTINGS TAB -->
+            <section id="tab-settings" class="tab-pane">
+                <div class="settings-container">
+                    <div class="settings-card">
+                        <h3>Profil Mahasiswa & Parameter</h3>
+                        <form id="form-settings-profile">
+                            <div class="form-group">
+                                <label for="settings-user-name">Nama Kamu</label>
+                                <input type="text" id="settings-user-name" placeholder="Masukkan nama panggilanmu">
+                            </div>
+                            <div class="form-group">
+                                <label for="settings-daily-limit">Default Jatah Makan Harian (Rp)</label>
+                                <input type="number" id="settings-daily-limit" value="50000" min="5000" step="5000">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Simpan Profil</button>
+                        </form>
+                    </div>
+
+                    <div class="settings-card danger-zone">
+                        <h3>Aksi Cepat & Data</h3>
+                        <p class="description">Gunakan tombol berikut untuk mengisi data percobaan atau mengosongkan semua data aplikasi.</p>
+                        <div class="actions-grid">
+                            <button class="btn btn-success" id="btn-load-demo-data">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                                Isi Data Demo (Sangat Direkomendasikan)
+                            </button>
+                            <button class="btn btn-danger" id="btn-reset-all">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                                Reset Seluruh Data Aplikasi
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- MODAL ADD/EDIT CLASS -->
+    <div class="modal-overlay" id="modal-class">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="modal-class-title">Tambah Jadwal Kelas</h3>
+                <button class="btn-close-modal" id="btn-close-class-modal">&times;</button>
+            </div>
+            <form id="form-class" class="modal-body">
+                <input type="hidden" id="class-id">
+                <div class="form-group">
+                    <label for="class-name">Nama Mata Kuliah *</label>
+                    <input type="text" id="class-name" required placeholder="Contoh: Kalkulus II">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="class-day">Hari *</label>
+                        <select id="class-day" required>
+                            <option value="1">Senin</option>
+                            <option value="2">Selasa</option>
+                            <option value="3">Rabu</option>
+                            <option value="4">Kamis</option>
+                            <option value="5">Jumat</option>
+                            <option value="6">Sabtu</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="class-room">Ruangan / Link Meet *</label>
+                        <input type="text" id="class-room" required placeholder="Contoh: Gedung D 302 / Zoom">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="class-start">Jam Mulai *</label>
+                        <input type="time" id="class-start" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="class-end">Jam Selesai *</label>
+                        <input type="time" id="class-end" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="class-lecturer">Dosen Pengampu</label>
+                    <input type="text" id="class-lecturer" placeholder="Contoh: Prof. Dr. Ir. Budi Santoso">
+                </div>
+                <div class="form-group">
+                    <label for="class-notes">Catatan Tambahan (Opsional)</label>
+                    <textarea id="class-notes" rows="2" placeholder="Tugas kelompok, bahan UTS, dll."></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" id="btn-cancel-class">Batal</button>
+                    <button type="submit" class="btn btn-primary" id="btn-save-class">Simpan Kelas</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL ADD MEAL EXPENSE -->
+    <div class="modal-overlay" id="modal-meal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Catat Pengeluaran Makan</h3>
+                <button class="btn-close-modal" id="btn-close-meal-modal">&times;</button>
+            </div>
+            <form id="form-meal" class="modal-body">
+                <div class="form-group">
+                    <label for="meal-time-type">Jenis Waktu Makan *</label>
+                    <select id="meal-time-type" required>
+                        <option value="breakfast">Sarapan</option>
+                        <option value="lunch" selected>Makan Siang</option>
+                        <option value="dinner">Makan Malam</option>
+                        <option value="snack">Cemilan / Minuman / Lainnya</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="meal-name">Nama Makanan / Minuman *</label>
+                    <input type="text" id="meal-name" required placeholder="Contoh: Nasi Padang Lauk Ayam Bakar">
+                </div>
+                <div class="form-group">
+                    <label for="meal-cost">Harga (Rupiah) *</label>
+                    <div class="input-with-prefix">
+                        <span class="prefix">Rp</span>
+                        <input type="number" id="meal-cost" required min="500" placeholder="Contoh: 18000" step="1000">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline" id="btn-cancel-meal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan Catatan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- AUTH GATE OVERLAY -->
+    <div class="auth-overlay" id="auth-container">
+        <div class="auth-card">
+            <div class="auth-brand">
+                <div class="logo-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h2>UniDaily</h2>
+            </div>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="tab-login-btn">Masuk</button>
+                <button class="auth-tab" id="tab-register-btn">Daftar Akun</button>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="form-login" class="auth-form active">
+                <div class="form-group">
+                    <label for="login-username">Username</label>
+                    <input type="text" id="login-username" required placeholder="Masukkan username Anda">
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required placeholder="Masukkan password Anda">
+                </div>
+                <button type="submit" class="btn btn-primary w-full mt-4">Masuk</button>
+            </form>
+            
+            <!-- Register Form -->
+            <form id="form-register" class="auth-form">
+                <div class="form-group">
+                    <label for="register-username">Username *</label>
+                    <input type="text" id="register-username" required placeholder="Minimal 3 karakter, huruf/angka">
+                </div>
+                <div class="form-group">
+                    <label for="register-name">Nama Lengkap / Panggilan *</label>
+                    <input type="text" id="register-name" required placeholder="Contoh: Budi Utomo">
+                </div>
+                <div class="form-group">
+                    <label for="register-password">Password *</label>
+                    <input type="password" id="register-password" required placeholder="Minimal 3 karakter">
+                </div>
+                <button type="submit" class="btn btn-primary w-full mt-4">Daftar Akun</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="auth.js"></script>
+    <script src="schedule.js"></script>
+    <script src="meals.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
